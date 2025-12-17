@@ -22,3 +22,17 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `
 
 setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+
+const backendUrl = '16.16.24.168';
+
+fetch(backendUrl)
+  .then(response => response.text())
+  .then(data => {
+    console.log("Data received:", data);
+    // Find the #app div and append the message
+    const app = document.querySelector<HTMLDivElement>('#app')!;
+    app.innerHTML += `<p>Message from AWS: <strong>${data}</strong></p>`;
+  })
+  .catch(error => {
+    console.error("Error fetching data:", error);
+  });
